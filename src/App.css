@@ -1,0 +1,226 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: local('Ubuntu'), url(fonts/Ubuntu-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu-bold';
+  src: local('Ubuntu-bold'), url(fonts/Ubuntu-Bold.ttf) format('truetype');
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+html, body, #root, .page {
+  width: 100%;
+  height: 100%;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: 'Ubuntu';
+}
+
+
+.current {
+  background: #18558c;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.current .content{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #517daa;
+}
+.current .content .temp{
+  display: flex;
+  align-items: center;
+}
+.current .content p{
+  margin: .3em;
+}
+.current .content .claim{
+  font-size: 2em;
+}
+.current .content .claim .location, .current .content .claim .weather{
+  font-family: 'Ubuntu-bold';
+}
+.current .content .temp .text{
+  font-size: 5em;
+  margin-left: .3em;
+}
+.current .content .wi:before{
+  font-size: 5em;
+  color: #517daa;
+}
+
+
+
+
+.forecast {
+  background: #e4e4e4;
+  width: 100%;
+  left: calc(-100% + 40px);
+  transition: left ease 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #898989;
+}
+.forecast.open {
+  left: -40px;
+  transition: left ease 0.5s;
+}
+.forecast .content{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  flex: 1;
+  margin: 40px;
+  padding-left: 40px;
+}
+.forecast .content h1{
+  font-weight: normal;    
+  margin: 0;
+  margin-bottom: 2em;
+}
+.forecast .content .list{
+  width: 100%; 
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding:0;
+  margin:0;
+}
+.forecast .content .list li{    
+  width: 25%;
+  height: 5vw;
+  /* border: white 1px solid; */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  align-items: flex-start;
+  display: flex;
+  justify-content: flex-start;
+}
+@media (orientation: portrait) {
+  .forecast .content .list li{    
+    width: 33%;
+    height: 7vw;
+  }
+}
+.forecast .content .list li .listItem{  
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.forecast .content .list li .listItem .wi{  
+  margin-right: .5em;
+  margin-top: -1.5em;
+  min-width: 3em;
+  margin-left: -.5em;
+}
+.forecast .content .list li .listItem .wi:before{ 
+  font-size: 2em;
+}
+.forecast .content .list li .listItem .inner{  
+  display: flex; 
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.forecast .content .list li .listItem .inner .atTime{
+  display: flex; 
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.forecast .content .list li .listItem .inner p{
+  margin: .3em;
+}
+.forecast .content .list li .listItem .weather{
+  margin-top: .6em;
+}
+.forecast .handle {
+    width: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    height: 100%;
+}
+
+
+
+.slide-enter,
+.slide-exit {
+  transition: transform 1000ms ease-out;
+}
+
+.slide-enter {
+  transform: translateX(-100%);
+}
+
+.slide-enter.slide-enter-active {
+  transform: translateX(0%);
+}
+
+.slide-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /*transform: translateX(0%);*/
+  transform: translateX(-100%);
+}
+
+.slide-exit-active {
+  transform: translateX(-100%); 
+}
