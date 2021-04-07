@@ -23,24 +23,12 @@ function App() {
     return doTransition;
   }
 
-  const AnimatedSwitch = withRouter(({ location }) => (
-    <TransitionGroup>
-      <CSSTransition key={location.key} classNames={canSlide(location.pathname)?'slide':''} timeout={canSlide(location.pathname)?1000:0}>
-        <Switch location={location}>
-          <Route path="/" exact><CurrentWeather /></Route>
-          <Route path="/forecast"><Next3DaysForcast /></Route>
-        </Switch>
-      </CSSTransition>
-    </TransitionGroup>
-  ));
-//<AnimatedSwitch></AnimatedSwitch>
+
   return (
     <div className="App page">
       <Provider store={store}>
         <BrowserRouter>
-          <Route path="/"><Home /></Route>
-          <Route path="/current" ><Home /></Route>
-          <Route path="/forecast"><Home /></Route>
+          <Route path="/"><Home /></Route> 
         </BrowserRouter>
       </Provider>
     </div>
