@@ -1,10 +1,10 @@
 
 
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './reducers/showsSlice';
+import reducer from './reducers/dataSlice';
 
 export default configureStore({
   reducer: {
-    shows: counterReducer,
+    data: reducer,
   },
 });

@@ -1,33 +1,44 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { usePosition } from "use-position";
 import WeatherView from "../components/molecules/WeatherView";
+import { latitudeWeather, curForecasts, longitudeWeather, curLatitude, curLongitude, forecastWeather } from "../reducers/dataSlice";
 
 const Next3DaysForcast = () => {
 
     const history = useHistory();
-    const [forecast, setForecast] = useState([]);
     const { latitude, longitude, error } = usePosition();
-    const v = history.location.pathname == '/forecast';
+    const v = history.location.pathname === '/forecast';
     const [open, setOpen] = useState(v);
-    let prevLat, prevLon, timeout;
+    const { config } = require('./../config.js'); 
+
+    const key = config.open_weather_key;
+    
+    const stateLatitude = useSelector(curLatitude);
+    const stateLongitude = useSelector(curLongitude);
+    const stateForecasts = useSelector(curForecasts);
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
-        timeout = setTimeout(() => {history.push(open?'/forecast':'/current');}, 500);
+        setTimeout(() => {history.push(open?'/forecast':'/current');}, 500);
     }, [open]);
+    
 
-    
     useEffect(() => {
-        return(() => {clearTimeout(timeout);});
-    }, []);
-    
-    useEffect(() => {
-        if ((latitude && longitude) && prevLat !== latitude && prevLon !== longitude) {
-            prevLat = latitude;
-            prevLon = longitude;
-            getForecastWeather(latitude, longitude);
+        if((latitude && longitude) && stateLatitude !== latitude && stateLongitude !== longitude) {
+            dispatch(latitudeWeather(latitude));
+            dispatch(longitudeWeather(longitude));
+            if(stateForecasts.length === 0){
+                getForecastWeather(latitude, longitude);
+            }
+        }else{
+            if(stateForecasts.length === 0){
+                getForecastWeather(latitude, longitude);
+            }
         }
     }, [latitude, longitude]);
 
@@ -40,12 +51,12 @@ const Next3DaysForcast = () => {
 
     async function getForecastWeather(latitude, longitude) {
         try {
-            const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=e42b8a64b85c3678b32ad32616604960&units=metric&lang=it&exclude=daily,minutely,current,alerts`);
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric&lang=it&exclude=daily,minutely,current,alerts`);
             const filtered = response?.data?.hourly.filter(el => {
                 const date = new Date(el.dt * 1000);
-                return date.getHours()%3 == 0;
+                return date.getHours()%4 === 0;
             }) || [];
-            setForecast(filtered);
+            dispatch(forecastWeather(filtered));
         } catch (error) {
             console.error(error);
         }
@@ -56,18 +67,18 @@ const Next3DaysForcast = () => {
     };
     
     return(
-        forecast && <div className={`forecast page ${open?'open':''}`}>
+        stateForecasts && <div className={`forecast page ${open?'open':''}`}>
             <div className="content">
                 <h1>Previsioni</h1>
                 <ul className="list">
                     {
-                    forecast.map((f, i) => {
+                    stateForecasts.map((f, i) => {
                         return <li key={i}><WeatherView data={f}></WeatherView></li>}
                     )
                     }
                 </ul>
             </div>
-            <div className="handle" onClick={toggle}>|||</div>
+            <div className="handler" onClick={toggle}>|||</div>
         </div>
     );
 };

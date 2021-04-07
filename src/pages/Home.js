@@ -10,7 +10,7 @@ const Home = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if(history?.location?.pathname == '/'){
+    if(history?.location?.pathname === '/'){
       //history.push("/current");
     }
   }, [history]);

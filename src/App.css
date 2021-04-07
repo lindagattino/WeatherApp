@@ -80,6 +80,10 @@ html, body, #root, .page {
 }
 .current .content .claim{
   font-size: 2em;
+  display: flex;
+  align-items: flex-start;
+}
+.current .content .claim .location{
 }
 .current .content .claim .location, .current .content .claim .weather{
   font-family: 'Ubuntu-bold';
@@ -146,9 +150,15 @@ html, body, #root, .page {
   display: flex;
   justify-content: flex-start;
 }
-@media (orientation: portrait) {
+@media (max-width: 1024px) {
   .forecast .content .list li{    
     width: 33%;
+    height: 7vw;
+  }
+}
+@media (max-width: 750px) {
+  .forecast .content .list li{    
+    width: 50%;
     height: 7vw;
   }
 }
@@ -178,6 +188,9 @@ html, body, #root, .page {
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .forecast .content .list li .listItem .inner p{
   margin: .3em;
@@ -185,7 +198,7 @@ html, body, #root, .page {
 .forecast .content .list li .listItem .weather{
   margin-top: .6em;
 }
-.forecast .handle {
+.forecast .handler {
     width: 40px;
     position: absolute;
     top: 0;
@@ -195,6 +208,7 @@ html, body, #root, .page {
     justify-content: center;
     font-size: 1.5em;
     height: 100%;
+    cursor: pointer;
 }
 
 

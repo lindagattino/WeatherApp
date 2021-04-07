@@ -17,7 +17,7 @@ function App() {
 
   const canSlide = (pathname) => {
     let doTransition = false;
-    if(pathname == '/forecast'){
+    if(pathname === '/forecast'){
       doTransition = true
     }
     return doTransition;
@@ -39,6 +39,8 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Route path="/"><Home /></Route>
+          <Route path="/current" ><Home /></Route>
+          <Route path="/forecast"><Home /></Route>
         </BrowserRouter>
       </Provider>
     </div>
