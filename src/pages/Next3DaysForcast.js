@@ -11,8 +11,8 @@ const Next3DaysForcast = () => {
 
     const history = useHistory();
     const { latitude, longitude, error } = usePosition();
-    const v = history.location.pathname === '/forecast';
-    const [open, setOpen] = useState(v);
+    const o = history.location.pathname === '/forecast';
+    const [open, setOpen] = useState(o);
     const { config } = require('./../config.js'); 
 
     const key = config.open_weather_key;
@@ -24,6 +24,7 @@ const Next3DaysForcast = () => {
 
 
     useEffect(() => {
+       // const v = history.location.pathname === '/forecast';
         setTimeout(() => {history.push(open?'/forecast':'/current');}, 500);
     }, [open]);
     

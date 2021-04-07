@@ -44,8 +44,8 @@ const CurrentWeather = () => {
         try {
             const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric&lang=it`);
             const weather = {
-                cod: response?.data?.cod + '',
-                temp: Math.round(response?.data?.main?.temp_max),
+                cod: response?.data?.weather[0]?.id + '',
+                temp: Math.round(response?.data?.main?.temp),
                 desc: response?.data?.weather[0]?.description,
                 date: new Date(response?.data?.dt*1000),
                 loc: response?.data?.name

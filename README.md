@@ -7,6 +7,7 @@ https://openweathermap.org/price#weather
 (it takes some hours to enable you);
 
 **then put your key into config.js that you find into the root**
+where "XXX" is
 
 open terminal moving to folder WeatherApp
 **cd WeatherApp/**

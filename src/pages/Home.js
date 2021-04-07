@@ -9,12 +9,6 @@ const Home = () => {
 
   const history = useHistory();
 
-  useEffect(() => {
-    if(history?.location?.pathname === '/'){
-      //history.push("/current");
-    }
-  }, [history]);
-
   return (
     <div className="home">
       <CurrentWeather></CurrentWeather>
